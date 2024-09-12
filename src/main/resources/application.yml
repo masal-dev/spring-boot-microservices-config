@@ -1,0 +1,27 @@
+spring.application.name: spring-boot-microservices-config
+
+# Example of using string interpolation on other properties inside the property file itself
+app:
+  name: My App
+  description: Welcome to ${app.name}
+
+# Used to test @Value in GreetingController
+my:
+  greeting: Hello World!
+
+# Property as list using SPEL (Spring Expression Language)
+# Used to test @Value in GreetingController
+  list.of.values: One,Two,Three # in Yaml some variables can also be kept with dot notation
+
+# Property as map using SPEL (Spring Expression Language)
+# Used to test @Value in GreetingController
+db:
+  connection: "connection-string-here"
+  host: 127.0.0.1
+  port: 1492
+
+# in YAML, keys without other elements in the chain can also be left without indentation
+# Used to enable actuator endpoints and test /actuator/configprops
+management.endpoints.web.exposure.include: "*"
+
+
