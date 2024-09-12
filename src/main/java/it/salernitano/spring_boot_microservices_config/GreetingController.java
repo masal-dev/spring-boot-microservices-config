@@ -1,6 +1,6 @@
 package it.salernitano.spring_boot_microservices_config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import it.salernitano.spring_boot_microservices_config.components_by_profile.GenericComponent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,19 +42,21 @@ public class GreetingController {
     //@Autowired -> constructor injection is recommended instead
     private final DbSettings dbSettings;
 
+    private final GenericComponent genericComponent;
+
     public GreetingController(
             // I can put after colon a value assigned if property is not found
             // either in the application.properties in the jar
             // or the application.properties in the same dir of jar
             // or in a --property=<value> parameter of java -jar command
-            @Value("${my.greeting: Default Greeting if property not found}")
-            String greeting,
-            DbSettings dbSettings) {
+            @Value("${my.greeting: Default Greeting if property not found}") String greeting,
+            DbSettings dbSettings,
+            // for this component a different implementation is injected according to profile
+            GenericComponent genericComponent) {
         this.greetingMessage = greeting;
         this.dbSettings = dbSettings;
+        this.genericComponent = genericComponent;
     }
-
-
 
     @GetMapping("/greeting")
     public String greeting (){
@@ -64,6 +66,7 @@ public class GreetingController {
                 + dbValues + "<br/>"
                 + dbSettings.getConnection() + "<br/>"
                 + dbSettings.getHost() + "<br/>"
-                + dbSettings.getPort();
+                + dbSettings.getPort() + "<br/>" + "<br/>"
+                + genericComponent.genericMethod();
     }
 }
