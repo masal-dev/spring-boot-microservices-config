@@ -16,6 +16,7 @@ my:
 # Property as map using SPEL (Spring Expression Language)
 # Used to test @Value in GreetingController
 db:
+  values: "{configurationString: 'http://...', username: 'foo', password: 'pass'}"
   connection: "connection-string-here"
   host: 127.0.0.1
   port: 1492
@@ -24,4 +25,7 @@ db:
 # Used to enable actuator endpoints and test /actuator/configprops
 management.endpoints.web.exposure.include: "*"
 
-
+# switching to test profile
+spring:
+  profiles:
+    active: test, test2

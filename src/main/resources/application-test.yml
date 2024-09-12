@@ -1,0 +1,6 @@
+# It's possible to put in the specific profile
+#  only the properties that need to override the default profile's ones
+db:
+  connection: test-connection-string-here
+  host: 129.0.0.1
+  port: 1815

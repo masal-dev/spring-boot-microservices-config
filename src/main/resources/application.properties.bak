@@ -13,6 +13,7 @@ my.list.of.values=One,Two,Three
 
 # Property as map using SPEL (Spring Expression Language)
 # Used to test @Value in GreetingController
+db.values={configurationString: 'http://...', username: 'foo', password: 'pass'}
 db.connection={configurationString: 'http://...', username: 'foo', password: 'pass'}
 db.host=127.0.0.1
 db.port:1492

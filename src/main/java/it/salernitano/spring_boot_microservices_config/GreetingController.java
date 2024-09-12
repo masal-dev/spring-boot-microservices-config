@@ -30,7 +30,7 @@ public class GreetingController {
     // to inject an entire list of properties as object notation
     // in a map object of key-value pairs.
     // (db.values={configurationString: 'http://...', username: 'foo', password: 'pass'})
-    @Value("#{${db.connection}}")
+    @Value("#{${db.values}}")
     private Map<String, String> dbValues;
 
 

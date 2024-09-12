@@ -1,0 +1,7 @@
+# It's possible to stack profiles
+# this override the test one port only
+# due to the order in which the profiles are listed in
+# spring.profiles.active property
+db:
+  port: 1816
+
