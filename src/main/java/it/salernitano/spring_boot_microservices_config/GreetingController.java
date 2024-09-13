@@ -2,6 +2,7 @@ package it.salernitano.spring_boot_microservices_config;
 
 import it.salernitano.spring_boot_microservices_config.components_by_profile.GenericComponent;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RefreshScope
 public class GreetingController {
 
     // *** PROPERTIES ARE BY DEFAULT IN FILE: resources/application.properties
