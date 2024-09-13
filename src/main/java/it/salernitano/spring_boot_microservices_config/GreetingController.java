@@ -2,6 +2,7 @@ package it.salernitano.spring_boot_microservices_config;
 
 import it.salernitano.spring_boot_microservices_config.components_by_profile.GenericComponent;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-
 public class GreetingController {
 
     // *** PROPERTIES ARE BY DEFAULT IN FILE: resources/application.properties
@@ -44,6 +44,8 @@ public class GreetingController {
 
     private final GenericComponent genericComponent;
 
+    private final Environment env;
+
     public GreetingController(
             // I can put after colon a value assigned if property is not found
             // either in the application.properties in the jar
@@ -52,14 +54,16 @@ public class GreetingController {
             @Value("${my.greeting: Default Greeting if property not found}") String greeting,
             DbSettings dbSettings,
             // for this component a different implementation is injected according to profile
-            GenericComponent genericComponent) {
+            GenericComponent genericComponent,
+            Environment environment) {
         this.greetingMessage = greeting;
         this.dbSettings = dbSettings;
         this.genericComponent = genericComponent;
+        this.env = environment;
     }
 
     @GetMapping("/greeting")
-    public String greeting (){
+    public String greeting() {
         return greetingMessage + "<br/>"
                 + staticMessage + "<br/>"
                 + myListOfValues + "<br/>"
@@ -68,5 +72,10 @@ public class GreetingController {
                 + dbSettings.getHost() + "<br/>"
                 + dbSettings.getPort() + "<br/>" + "<br/>"
                 + genericComponent.genericMethod();
+    }
+
+    @GetMapping("/envdetails")
+    public String envDetails() {
+        return env.toString();
     }
 }
