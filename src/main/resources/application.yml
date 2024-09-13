@@ -1,5 +1,8 @@
 spring.application.name: spring-boot-microservices-config
 
+# default config server is http://localhost:8888
+# spring.cloud.config.uri: http://localhost:8888
+
 # Example of using string interpolation on other properties inside the property file itself
 app:
   name: My App
@@ -29,3 +32,6 @@ management.endpoints.web.exposure.include: "*"
 spring:
   profiles:
     active: test, test2
+
+spring.config.import: "configserver:"
+# spring.config.import: "optional:configserver:"
